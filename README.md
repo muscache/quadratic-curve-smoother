@@ -17,11 +17,13 @@ After splitting the data into windows, we operate on a single window at a time.
 First, determine the local maxima and minima for the window. In the case of more than one maxima, the last value is chosen. Of course, to capture *all* peaks, you need to use a larger window size.
 
 We have this simple equation:
+
 ![](https://github.com/muscache/quadratic-curve-smoother/blob/master/static/initial_equation.png?raw=true)
 
 Where `Max` is the local maxima, `Min` is the local minima and `ArgMax` is the index of the local maxima
 
 Our next step is to determine `Slope`. For that, simply transpose the above (while setting y = 0) to get this:
+
 ![](https://github.com/muscache/quadratic-curve-smoother/blob/master/static/transposed_equation.png?raw=true)
 
 What should `x` be here? It should be the value furthest away from `ArgMax`!
@@ -33,6 +35,7 @@ This `x` value is referred to as "poi" in the code.
 Why we have this rule-based selection of "poi" is left as an exercise to the reader.
 
 At this point we have everything we need to actually smooth the curve. Simply iterate over the points in the window and set the `i`th value to:
+
 ![](https://github.com/muscache/quadratic-curve-smoother/blob/master/static/final_equation.png?raw=true)
 
 
